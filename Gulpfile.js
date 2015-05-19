@@ -14,7 +14,7 @@ var paths = {
         dest: 'public/css'
     },
     js: {
-        src: 'src/js/*.js',
+        src: 'src/scripts/*.js',
         dest: 'public/js'
     }
 };
@@ -49,15 +49,15 @@ gulp.task('scripts', function () {
             // .pipe(gulp.dest(paths.js.dest));
 });
 
-gulp.task('nodemon', function (cb) {
-    return nodemon({
+gulp.task('nodemon', function () {
+    nodemon({
         script: 'app.js',
         ignore: [
             './public/components/**', // bower components
             './node_modules/**',
         ]
-    }).on('start', function () {
-        cb();
+    }).on('restart', function () {
+        console.log('nodemon restarted');
     });
 });
 

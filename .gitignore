@@ -3,3 +3,4 @@ node_modules
 *.tmp
 .sass-cache
 public/css/*.css
+public/components

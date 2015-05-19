@@ -1,3 +1,11 @@
-<header class="navbar navbar-default navbar-fixed-top">
-    <div class="container">this is header area</div>
+<header class="navbar-fixed-top">
+
+    <div class="container">
+       	<div class="square hamburger-wrap">
+    		<i class="fa fa-list-ul"></i>&nbsp;
+    	</div> 
+    	<div class="square search-wrap">
+    		<i class="fa fa-search"></i>&nbsp;
+    	</div>
+    </div>
 </header>

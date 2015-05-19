@@ -1,3 +1,24 @@
 header
-    background: red
+    background: $common-background-color
+    color: $common-font-color
     height: $header-height
+    border-bottom: 1px solid #e5e5e5
+
+    .container
+        position: relative
+
+        .square
+            height: $header-height
+            width: $header-height
+            font-size: 1.3em
+
+        .hamburger-wrap, .search-wrap
+            text-align: center
+            line-height: $header-height
+            position: absolute
+
+        .hamburger-wrap
+            left: 0
+
+        .search-wrap
+            right: 0

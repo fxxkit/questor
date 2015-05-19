@@ -15,11 +15,15 @@ var paths = {
     },
     js: {
         src: 'src/scripts/*.js',
-        dest: 'public/js'
+        dest: 'public/scripts'
+    },
+    images: {
+        src: 'src/images/*',
+        dest: 'public/images'
     }
 };
 
-gulp.task('default', ['styles', 'scripts'], function () {
+gulp.task('default', ['styles', 'scripts', 'images'], function () {
     console.log('Hi Here is gulp default');
 });
 
@@ -36,6 +40,11 @@ gulp.task('styles', function () {
             // .pipe(rename({ suffix: '.min' }))
             // .pipe(minifycss())
             // .pipe(gulp.dest(path.js.dest));
+});
+
+gulp.task('images', function () {
+    return gulp.src(paths.images.src)
+            .pipe(gulp.dest(paths.images.dest));
 });
 
 gulp.task('scripts', function () {

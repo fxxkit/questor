@@ -2,5 +2,4 @@ node_modules
 *.swp
 *.tmp
 .sass-cache
-public/css/*.css
-public/components
+public

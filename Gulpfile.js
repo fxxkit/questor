@@ -14,12 +14,16 @@ var paths = {
         dest: 'public/css'
     },
     js: {
-        src: 'src/js/*.js',
-        dest: 'public/js'
+        src: 'src/scripts/*.js',
+        dest: 'public/scripts'
+    },
+    images: {
+        src: 'src/images/*',
+        dest: 'public/images'
     }
 };
 
-gulp.task('default', ['styles', 'scripts'], function () {
+gulp.task('default', ['styles', 'scripts', 'images'], function () {
     console.log('Hi Here is gulp default');
 });
 
@@ -38,6 +42,11 @@ gulp.task('styles', function () {
             // .pipe(gulp.dest(path.js.dest));
 });
 
+gulp.task('images', function () {
+    return gulp.src(paths.images.src)
+            .pipe(gulp.dest(paths.images.dest));
+});
+
 gulp.task('scripts', function () {
     return gulp.src(paths.js.src)
             .pipe(concat('main.js'))
@@ -49,15 +58,15 @@ gulp.task('scripts', function () {
             // .pipe(gulp.dest(paths.js.dest));
 });
 
-gulp.task('nodemon', function (cb) {
-    return nodemon({
+gulp.task('nodemon', function () {
+    nodemon({
         script: 'app.js',
         ignore: [
             './public/components/**', // bower components
             './node_modules/**',
         ]
-    }).on('start', function () {
-        cb();
+    }).on('restart', function () {
+        console.log('nodemon restarted');
     });
 });
 

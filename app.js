@@ -1,8 +1,8 @@
 var express = require('express'),
     path = require('path'),
     exphbs = require('express-handlebars'),
-    debug = require('debug')('handle'),
-    db_connection = require('./datamodel/my-mongo');     
+    debug = require('debug')('handle');
+    //db_connection = require('./datamodel/my-mongo');     
 
 var app = express();
 

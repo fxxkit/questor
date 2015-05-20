@@ -1,4 +1,7 @@
 $(document).ready(function() {
-	google.maps.event.addDomListener(window, 'load', initialize);
-	bindSearchEvents();
+	
+	var mapObj = new MyMap();
+    mapObj.init(25.0562402, 121.6241145);
+
+    bindSearchEvents();
 });

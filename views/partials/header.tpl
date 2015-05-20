@@ -8,5 +8,5 @@
     	</div>
     	
     </div>
-    <input class="search-bar" />
+    <input class="search-bar" autocapitalize="off" autocomplete="off" autocorrect="off" />
 </header>

@@ -2,27 +2,9 @@ var express = require('express'),
     path = require('path'),
     exphbs = require('express-handlebars'),
     debug = require('debug')('handle'),
-    mongodb = require('mongodb');
+    db_connection = require('./datamodel/my-mongo');     
 
 var app = express();
-
-var MongoClient = mongodb.MongoClient;
-var url = "mongodb://questor:iloveu@ds053638.mongolab.com:53638/questor_db";
-
-// Use connect method to connect to the Server
-var db = MongoClient.connect(url, function (err, db) {
-  if (err) {
-    console.log('Unable to connect to the mongoDB server. Error:', err);
-  } else {
-    //HURRAY!! We are connected. :)
-    console.log('Connection established to', url);
-
-    // do some work here with the database.
-
-    //Close connection
-    //db.close();
-  }
-});
 
 
 // view engine setup
@@ -58,4 +40,52 @@ app.get('/greeting', function (req, res) {
 app.set('port', process.env.PORT || 3000);
 var server = app.listen(app.get('port'), function() {
   debug('Express server listening on port ' + server.address().port);
+});
+
+
+
+
+//REST API
+app.get('/api', function (req, res) {
+    res.send('Questor API is running');
+});
+
+/*
+    @GET /api/mytask?uid=12345
+*/
+app.get('/api/myTask', function (req, res) {
+    var uid = req.query.uid;
+    var mock_response = {
+        uid: uid,
+        taskList: [
+            {
+                title: 'HAHAHA_TASK',
+                type: 'running'        
+            },
+            {
+                title: 'BABABA_TASK',
+                type: 'poopoo'        
+            },
+            {
+                title: 'GGG_TASK',
+                type: 'sockmydxxk'        
+            }
+        ]
+        
+    };
+    res.send(mock_response);
+});
+
+/*
+    @GET /api/nearbyTask?lat=25.0562402&lng=121.6241145
+*/
+app.get('/api/nearbyTask', function (req, res){
+    var lat = req.query.lat;
+    var lng = req.query.lng;
+    var mock_response = {
+        query_lat: lat,
+        query_lng: lng,
+        nearbyTaskIdList: [1,2,3,4,5,6,7,8,9]
+    }
+    res.send(mock_response);
 });

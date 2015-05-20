@@ -18,7 +18,25 @@ header
             position: absolute
 
         .hamburger-wrap
-            left: 0
+            left: 10px
 
         .search-wrap
-            right: 0
+            right: 10px
+
+    .search-bar
+        width: 100%
+        height: $header-height
+        border: 0
+        line-height: $header-height
+        background: none
+        outline: none
+        font-size: 1.15em
+        padding: 0 53px
+        margin: 0
+        top: -1px
+        font-family: $common-font
+        transition: background .5s ease-in-out
+
+        &:focus
+            background: white
+

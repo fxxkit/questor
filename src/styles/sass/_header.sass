@@ -3,6 +3,7 @@ header
     color: $common-font-color
     height: $header-height
     border-bottom: 1px solid #e5e5e5
+    z-index: 2
 
     .container
         position: relative
@@ -26,17 +27,27 @@ header
     .search-bar
         width: 100%
         height: $header-height
-        border: 0
-        line-height: $header-height
-        background: none
+        line-height: 24px
         outline: none
-        font-size: 1.15em
-        padding: 0 53px
-        margin: 0
-        top: -1px
+
         font-family: $common-font
+        font-size: 1.15em
+
+        top: -1px
+        margin: 0
+        padding: 10px 53px
+
+        background: none
+
+        border: 0
+        border-bottom-style: solid
+        border-bottom-width: 1px
+        border-bottom-color: white
+
         transition: background .5s ease-in-out
+        transition: border-bottom-color .4s ease-in-out
 
         &:focus
             background: white
+            border-bottom-color: #e5e5e5
 

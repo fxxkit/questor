@@ -1,6 +1,6 @@
 {
-    "node": true,           // node environment
-    "undef": false,         // supress error on use of undefined variables
+    "node": true,
+    "undef": false,
     "globals": {
         "$": false,
         "jQuery": false,

@@ -1,28 +1,29 @@
+@import compass/css3
+
 header
     background: $common-background-color
     color: $common-font-color
     height: $header-height
     border-bottom: 1px solid #e5e5e5
     z-index: 2
+    position: relative
 
-    .container
-        position: relative
 
-        .square
-            height: $header-height
-            width: $header-height
-            font-size: 1.3em
+    .square
+        height: $header-height
+        width: $header-height
+        font-size: 1.3em
 
-        .hamburger-wrap, .search-wrap
-            text-align: center
-            line-height: $header-height
-            position: absolute
+    .hamburger-wrap, .search-wrap
+        text-align: center
+        line-height: $header-height
+        position: absolute
 
-        .hamburger-wrap
-            left: 10px
+    .hamburger-wrap
+        left: 10px
 
-        .search-wrap
-            right: 10px
+    .search-wrap
+        right: 10px
 
     .search-bar
         width: 100%
@@ -43,11 +44,13 @@ header
         border-bottom-style: solid
         border-bottom-width: 1px
         border-bottom-color: white
+        +box-shadow(#999 0px 0px 3px)
 
-        transition: background .5s ease-in-out
-        transition: border-bottom-color .4s ease-in-out
+        transition: all .5s ease-out
+
 
         &:focus
             background: white
             border-bottom-color: #e5e5e5
+            +box-shadow(#555 0px 0px 7px)
 

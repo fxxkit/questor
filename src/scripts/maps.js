@@ -19,6 +19,16 @@ function MyMap(){
         _bindCenterChangeEvent(map);
     };
 
+    oMap.addMarker = function (latitude, longitude) {
+        var latlon = new google.maps.LatLng(latitude, longitude);
+        var marker = new google.maps.Marker({position:latlon, map:map, title:"You are here!"});
+    };
+
+    oMap.setCenter = function (latitude, longitude) {
+        var latlon = new google.maps.LatLng(latitude, longitude);
+        map.setCenter(latlon);
+    };
+
     //private methods
     var _bindCenterChangeEvent = function(map){
         google.maps.event.addListener(map, 'dragend', function() {

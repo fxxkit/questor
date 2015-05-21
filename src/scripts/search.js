@@ -1,7 +1,12 @@
-var searchIconClickHandler = function (e) {
-	$('.search-bar').focus();
-}
 
+var searchIconPressHandler = function (e) {
+	if ($('.search-overlay').hasClass('mounted')) {
+		e.preventDefault();
+	} else {
+		$('.search-bar').focus();
+	}
+	
+}
 var searchBoxFocusHandler = function (e) {
 	$('.search-overlay').addClass('mounted');
 }
@@ -14,7 +19,7 @@ var searchOverlayClickHander = function () {
 }
 
 function bindSearchEvents () {
-	$('.search-wrap').click(searchIconClickHandler);
+	$('.search-wrap').mousedown(searchIconPressHandler).mouseup(searchIconPressHandler);
 	$('.search-bar').focus(searchBoxFocusHandler).blur(searchBoxBlurHandler);
 	$('.search-overlay').click(searchOverlayClickHander);
 }

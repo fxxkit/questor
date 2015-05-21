@@ -1,5 +1,5 @@
-
 function MyMap(){
+    'use strict';
     var oMap = this;
     // private property
     var map = null;

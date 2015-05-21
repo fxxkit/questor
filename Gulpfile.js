@@ -5,7 +5,10 @@ var gulp            = require('gulp'),
     browserSync     = require('browser-sync'),
     reload          = browserSync.reload,
     path            = require('path'),
-    nodemon         = require('gulp-nodemon');
+    nodemon         = require('gulp-nodemon'),
+    notify          = require('gulp-notify'),
+    jshint          = require('gulp-jshint'),
+    stylish         = require('jshint-stylish');
 
 var paths = {
     sass: {
@@ -56,6 +59,17 @@ gulp.task('scripts', function () {
             // .pipe(rename({ suffix: '.min' }))
             // .pipe(uglify())
             // .pipe(gulp.dest(paths.js.dest));
+});
+
+gulp.task('lint', function() {
+    return gulp.src(paths.js.src)
+        .pipe(jshint('.jshintrc'))
+        .pipe(jshint.reporter('jshint-stylish'))
+        .pipe(jshint.reporter('fail'))
+        .pipe(notify({
+            title: 'gulp lint',
+            message: 'Passed. Let it fly!'
+        }));
 });
 
 gulp.task('nodemon', function () {

@@ -1,7 +1,8 @@
 var express = require('express'),
     path = require('path'),
     exphbs = require('express-handlebars'),
-    debug = require('debug')('handle');
+    debug = require('debug')('handle'),
+    mock_data = require('./mock_data/task-data');
     //db_connection = require('./datamodel/my-mongo');     
 
 var app = express();
@@ -55,25 +56,7 @@ app.get('/api', function (req, res) {
 */
 app.get('/api/myTask', function (req, res) {
     var uid = req.query.uid;
-    var mock_response = {
-        uid: uid,
-        taskList: [
-            {
-                title: 'HAHAHA_TASK',
-                type: 'running'        
-            },
-            {
-                title: 'BABABA_TASK',
-                type: 'poopoo'        
-            },
-            {
-                title: 'GGG_TASK',
-                type: 'sockmydxxk'        
-            }
-        ]
-        
-    };
-    res.send(mock_response);
+    res.send(mock_data._mock_myTask);
 });
 
 /*
@@ -82,10 +65,5 @@ app.get('/api/myTask', function (req, res) {
 app.get('/api/nearbyTask', function (req, res){
     var lat = req.query.lat;
     var lng = req.query.lng;
-    var mock_response = {
-        query_lat: lat,
-        query_lng: lng,
-        nearbyTaskIdList: [1,2,3,4,5,6,7,8,9]
-    }
-    res.send(mock_response);
+    res.send(mock_data._mock_nearbyTask);
 });

@@ -3,6 +3,7 @@
 ## Quick Start
 
 ```sh
+# Install required package
 $ npm install && bower install
 ```
 
@@ -10,6 +11,12 @@ $ npm install && bower install
 # install compass
 $ gem update --system && gem install compass
 ```
+
+```sh
+# Install gulp
+$ npm install -g gulp
+```
+## Dev
 
 ```sh
 $ gulp serve

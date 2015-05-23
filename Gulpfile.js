@@ -101,8 +101,7 @@ gulp.task('serve', ['default', 'nodemon'], function() {
     // reload when a template file, the compiled css, or the js file changes
     gulp.watch([
         'views/**/*.tpl', 
-        path.join(paths.sass.dest, '*.css'),
-        path.join(paths.js.dest, '*.js')])
+        path.join(paths.sass.dest, '*.css')])
     .on('change', reload);
 });
 

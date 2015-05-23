@@ -1,19 +1,27 @@
+
 footer
     width: $footer-width
-    height: $footer-height
     background: $common-background-color
     position: fixed
     bottom: 0px
     text-align: center
-    font-size: 1.5em
     border-top: 1px solid #e5e5e5
     opacity: 0.9
+    padding-top: 6px
+    padding-bottom: 4px
 
-    a, a:focus, a:active
-        outline: none
-        text-decoration: none
+    .nav-icon, .nav-desc
+        display: block
 
-    .icon-set
-        height: $footer-height
-        line-height: $footer-height
+    .nav-icon
+        font-size: 1.5em
+
+    .nav-desc
+        font-size: 1.1em
+
+    a
         color: $common-font-color
+        outline: none
+        &:hover
+            text-decoration: none
+                

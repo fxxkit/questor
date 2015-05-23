@@ -19,6 +19,7 @@
 		console.debug('position.coords.longitude:',position.coords.longitude);
 		mapObj.addMarker(position.coords.latitude, position.coords.longitude);
 		mapObj.setCenter(position.coords.latitude, position.coords.longitude);
+		mapObj.fetchNearbyTasks(position.coords.latitude, position.coords.longitude);
 	}
 	function updateGeoErrorHandler(err) {
 	    switch(err.code) {
@@ -37,7 +38,6 @@
 	    }
 	    mapObj.addMarker(mapDefaultCenter.latitude, mapDefaultCenter.longitude);
 	}
-
 	$(document).ready(function() {
 		
 		mapObj = new MyMap();
@@ -46,6 +46,8 @@
 	    getLocation();
 
 	    bindSearchEvents();
+
+
 	});
 })();
 

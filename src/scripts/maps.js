@@ -26,7 +26,20 @@ function MyMap(){
 
     oMap.setCenter = function (latitude, longitude) {
         var latlon = new google.maps.LatLng(latitude, longitude);
+        map.panTo(latlon);
         map.setCenter(latlon);
+    };
+    oMap.addMarkers = function (latlons) {
+        oMap.addMarker($.each(latlons, function (idx, geo) {
+            console.debug('add', geo);
+            var latlon = new google.maps.LatLng(geo.lat, geo.lon);
+            var marker = new google.maps.Marker({position:latlon, map:map, title: geo.title});
+        }));
+    };
+    oMap.fetchNearbyTasks = function (latitude, longitude) {
+        $.getJSON('/api/tasks/near', {lat: latitude,lon: longitude} ,function (nearbyTasks) {
+            oMap.addMarkers(nearbyTasks);
+        });
     };
 
     //private methods

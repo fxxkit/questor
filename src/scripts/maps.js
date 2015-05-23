@@ -4,6 +4,7 @@ function MyMap(){
     // private property
     var map = null;
     var taskMarker = {};
+    var prevInfoWindow = null;
 
     //public methods
     oMap.init = function(latitude,longitude){
@@ -22,15 +23,41 @@ function MyMap(){
         _bindBoundsChangeEvent();
     };
 
-    oMap.addMarker = function (latitude, longitude) {
+    oMap.addUserLocationMarker = function (latitude, longitude) {
         var latlng = new google.maps.LatLng(latitude, longitude);
-        var marker = new google.maps.Marker({position:latlng, map:map, title:"You are here!"});
-        oMap.bindMarkerInfoWindow(marker);
+        var image = {
+            url: "images/current.png",
+            scaledSize: new google.maps.Size(20, 20),
+        };
+
+        var marker = new google.maps.Marker({
+            position:latlng, 
+            map:map, 
+            title:"You are here!",
+            icon: image
+        });
     };
-    oMap.addMarkers = function (latlngs) {
-        oMap.addMarker($.each(latlngs, function (idx, geo) {
-            oMap.addMarker(geo.lat,geo.lng);
-        }));
+
+    oMap.addTaskMarkers = function (taskObj) {
+        $.each(taskObj, function (idx, task) {
+            var latlng = new google.maps.LatLng(task.lat,task.lng);
+            var marker = new google.maps.Marker({
+                position:latlng, 
+                map:map, 
+                title:"You are here!",
+            });
+            marker.set("taskObj", task);
+            google.maps.event.addListener(marker,'click',function(){
+                if (prevInfoWindow != null){
+                    prevInfoWindow.close();
+                }
+                var infowindow = new google.maps.InfoWindow();
+                var taskObj = marker.get("taskObj");
+                infowindow.setContent("taskId: " + taskObj.taskId);
+                infowindow.open(map,marker);
+                prevInfoWindow = infowindow;
+            });
+        });
     };
 
     oMap.setCenter = function (latitude, longitude) {
@@ -39,15 +66,6 @@ function MyMap(){
         map.setCenter(latlon);
     };
     
-    oMap.bindMarkerInfoWindow = function (marker) {
-        var infowindow = new google.maps.InfoWindow({
-            content: "TEST CONTENT"
-        });
-        google.maps.event.addListener(marker, 'click', function() {
-            infowindow.open(map,marker);
-        });
-    };
-
     oMap.fetchNearbyTasks = function (neLat, neLng, swLat, swLng) {
         var borderLatLng = _getBorderLatLng();
         $.getJSON('/api/tasks/near', 
@@ -57,7 +75,7 @@ function MyMap(){
             sthWstLng: borderLatLng.sthWstLng
             },
             function (nearbyTasks) {
-                oMap.addMarkers(nearbyTasks);
+                oMap.addTaskMarkers(nearbyTasks);
         });
     };
 
@@ -80,7 +98,7 @@ function MyMap(){
     var _initGeo = function (position) {
         console.debug('position.coords.latitude:',position.coords.latitude);
         console.debug('position.coords.longitude:',position.coords.longitude);
-        oMap.addMarker(position.coords.latitude, position.coords.longitude);
+        oMap.addUserLocationMarker(position.coords.latitude, position.coords.longitude);
         oMap.setCenter(position.coords.latitude, position.coords.longitude);
         oMap.fetchNearbyTasks();
     };
@@ -99,7 +117,7 @@ function MyMap(){
                 console.warn("An unknown error occurred.");
                 break;
         }
-        oMap.addMarker(mapDefaultCenter.latitude, mapDefaultCenter.longitude);
+        oMap.addUserLocationMarker(mapDefaultCenter.latitude, mapDefaultCenter.longitude);
     };
 
 

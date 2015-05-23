@@ -7,7 +7,7 @@ var _mock_nearbyTask = {
 
 var _mock_myTask = {
     uid: "mock uid",
-    myTaskIdList: [1, 2, 3]
+    myTaskIdList: [1, 2, 3, 5, 8]
 };
 
 var _mock_allTasks = [

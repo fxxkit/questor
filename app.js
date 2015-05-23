@@ -30,6 +30,18 @@ app.get('/', function (req, res, next) {
     });
 });
 
+app.get('/mytasks', function (req, res) {
+    
+    var myTasks = mock_data._mock_myTask.myTaskIdList.map(function(taskId, idx){
+        return mock_data._mock_allTasks[taskId]
+    });
+    debug(myTasks);
+    res.render('mytasks', {
+        tasks: myTasks,
+        name: req.query.name
+    });
+});
+
 app.get('/greeting', function (req, res) {
     res.render('greeting', {
         title: "Hola!",

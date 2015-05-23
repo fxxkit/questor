@@ -52,18 +52,26 @@ app.get('/api', function (req, res) {
 });
 
 /*
-    @GET /api/mytask?uid=12345
+    @GET /api/tasks/<taskId>
 */
-app.get('/api/myTask', function (req, res) {
-    var uid = req.query.uid;
-    res.send(mock_data._mock_myTask);
+app.get('/api/tasks/:_id([0-9]{1,8})', function (req, res) {
+    var taskId = req.params._id;
+    debug('get task id:', taskId);
+    res.send(mock_data._mock_allTasks[taskId]);
 });
 
 /*
-    @GET /api/nearbyTask?lat=25.0562402&lng=121.6241145
+    @GET /api/tasks/near?lat=25.0562402&lon=121.6241145
 */
-app.get('/api/nearbyTask', function (req, res){
+app.get('/api/tasks/near', function (req, res){
     var lat = req.query.lat;
-    var lng = req.query.lng;
-    res.send(mock_data._mock_nearbyTask);
+    var lon = req.query.lon;
+
+    debug(req.query);
+
+    // collect nearby tasks by filtering taskId in allTasks
+    var nearbytasks =  mock_data._mock_nearbyTask.nearbyTaskIdList.map(function (taskId, idx) {
+        return mock_data._mock_allTasks[idx];
+    });
+    res.send(nearbytasks);
 });

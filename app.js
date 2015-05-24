@@ -50,10 +50,15 @@ app.get('/mytasks', function (req, res) {
     });
 });
 
-app.get('/greeting', function (req, res) {
-    res.render('greeting', {
-        title: "Hola!",
-        name: req.query.name
+app.get('/create', function (req, res) {
+    res.render('create', {
+        page: selectPage('create')
+    });
+});
+
+app.get('/setting', function (req, res) {
+    res.render('setting', {
+        page: selectPage('setting')
     });
 });
 

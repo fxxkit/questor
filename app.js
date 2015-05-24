@@ -114,24 +114,36 @@ app.post('/api/tasks',function  (req,res) {
     @GET /api/tasks/near?nrthEstLat=25.0562402&nrthEstLng=121.6241145&sthWstLat=25.0562402&sthWstLng=121.6241145
 */
 app.get('/api/tasks/near', function (req, res){
-    var nrthEstLat = req.query.nrthEstLat;
-    var nrthEstLng = req.query.nrthEstLng;
-    var sthWstLat = req.query.sthWstLat;
-    var sthWstLng = req.query.sthWstLng;
-    var resData = null;
+    var borderData = {
+        nrthEstLat : req.query.nrthEstLat,
+        nrthEstLng : req.query.nrthEstLng,
+        sthWstLat : req.query.sthWstLat,
+        sthWstLng : req.query.sthWstLng
+    };
 
     debug(req.query);
     var mock = req.query.mock;
     if(mock){
+        var resData = null;
         //The data in _mock_nearbyTask
         resData =  mock_data._mock_nearbyTask.nearbyTaskIdList.map(function (taskId, idx) {
            return mock_data._mock_allTasks[idx];
         });    
         //All mock data
         // resData = mock_data._mock_allTasks;
+
+        res.send(resData);   
     }
-    
-    res.send(resData);
+    else{
+        db.dataAccess.getNearByTasks(borderData,function(err,data){
+            if(!err){
+                res.send(data);
+            }
+            else{
+                res.send("");
+            }
+        });
+    }    
 });
 
 /*

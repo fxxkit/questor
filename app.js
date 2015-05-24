@@ -2,8 +2,8 @@ var express = require('express'),
     path = require('path'),
     exphbs = require('express-handlebars'),
     debug = require('debug')('handle'),
-    mock_data = require('./mock_data/task-data');
-    db = require('./datamodel/my-mongo');     
+    mock_data = require('./mock_data/task-data'),
+    db = require('./datamodel/my-mongo');
 
 var app = express();
 

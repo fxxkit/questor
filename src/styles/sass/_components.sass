@@ -25,11 +25,18 @@
 		right: 0
 
 	.task-ribon
-		width: 100%
-		height: 3px
 		position: absolute
 		top: 0
 		left: 0
+
+	.task-ribon.horizontal
+		width: 100%
+		height: 3px	
+
+	.task-ribon.vertical
+		width: 4px
+		height: 100%
+
 
 	&:nth-child(4n)
 		.task-ribon
@@ -62,7 +69,7 @@
 
 .card.edge2edge
 	margin-bottom: 0
-	border-bottom: 1px dashed #aaa
+	border-bottom: 1px dashed #eee
 
 	&:last-child
 		border-bottom: 0

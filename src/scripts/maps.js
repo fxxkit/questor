@@ -48,7 +48,7 @@ function MyMap(){
             });
             marker.set("taskObj", task);
             google.maps.event.addListener(marker,'click',function(){
-                if (prevInfoWindow != null){
+                if (prevInfoWindow !== null){
                     prevInfoWindow.close();
                 }
                 var infowindow = new google.maps.InfoWindow();

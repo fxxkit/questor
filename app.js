@@ -7,7 +7,6 @@ var express = require('express'),
 
 var app = express();
 
-
 // view engine setup
 app.engine('.tpl', exphbs({
     defaultLayout: 'single', 
@@ -22,23 +21,32 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', '.tpl');
 
+var selectPage = function (tab) {
+    return {
+        explore: tab === "explore",
+        mytasks: tab === "mytasks",
+        create:  tab === "create",
+        setting: tab === "setting"
+    }
+};
 
 // server route
 app.get('/', function (req, res, next) {
     res.render('index', {
-        title: "Home"
+        title: "Home",
+        page: selectPage('explore')
     });
 });
 
 app.get('/mytasks', function (req, res) {
-    
     var myTasks = mock_data._mock_myTask.myTaskIdList.map(function(taskId, idx){
         return mock_data._mock_allTasks[taskId]
     });
     debug(myTasks);
     res.render('mytasks', {
         tasks: myTasks,
-        name: req.query.name
+        name: req.query.name,
+        page: selectPage('mytasks')
     });
 });
 

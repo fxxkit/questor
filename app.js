@@ -3,7 +3,7 @@ var express = require('express'),
     exphbs = require('express-handlebars'),
     debug = require('debug')('handle'),
     mock_data = require('./mock_data/task-data');
-    //db_connection = require('./datamodel/my-mongo');     
+    db = require('./datamodel/my-mongo');     
 
 var app = express();
 
@@ -83,6 +83,28 @@ app.get('/api/tasks/:_id([0-9]{1,8})', function (req, res) {
 /*
     @POST /api/tasks
 */
+app.post('/api/tasks',function  (req,res) {
+    var testData = [{
+        "name": "Rose", 
+        "title": "depurative and infrabranchial", 
+        "taskId": 5, 
+        "lat": 25.05964, 
+        "lng": 121.652214, 
+        "type": "Washoan"
+        },
+        {
+        "name": "Ronalda", 
+        "title": "semibalked and asomatous", 
+        "taskId": 0, 
+        "lat": 25.05674, 
+        "lng": 121.596615, 
+        "type": "Waaaaaaxxxxxxxllach"
+    }];
+    db.dataAccess.insertTasks(testData,function(data){
+        console.log(data);
+        res.send(data);
+    });
+});
 
 /*
     @GET /api/tasks/near?nrthEstLat=25.0562402&nrthEstLng=121.6241145&sthWstLat=25.0562402&sthWstLng=121.6241145

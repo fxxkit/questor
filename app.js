@@ -2,8 +2,8 @@ var express = require('express'),
     path = require('path'),
     exphbs = require('express-handlebars'),
     debug = require('debug')('handle'),
-    mock_data = require('./mock_data/task-data');
-    db = require('./datamodel/my-mongo');     
+    mock_data = require('./mock_data/task-data'),
+    db = require('./datamodel/my-mongo');
 
 var app = express();
 
@@ -50,10 +50,15 @@ app.get('/mytasks', function (req, res) {
     });
 });
 
-app.get('/greeting', function (req, res) {
-    res.render('greeting', {
-        title: "Hola!",
-        name: req.query.name
+app.get('/create', function (req, res) {
+    res.render('create', {
+        page: selectPage('create')
+    });
+});
+
+app.get('/setting', function (req, res) {
+    res.render('setting', {
+        page: selectPage('setting')
     });
 });
 

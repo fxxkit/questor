@@ -1,7 +1,7 @@
 .card
 	width: 100% 
-	margin-bottom: 10px
 	list-style: none
+	margin-bottom: 10px
 	font-family: $common-font
 	display: block
 	padding: 11px 16px 11px 16px
@@ -20,3 +20,10 @@
 		display: inline-block
 		color: white
 		padding: 2px 5px
+
+.card.edge2edge
+	margin-bottom: 0
+	border-bottom: 1px dashed #aaa
+
+	&:last-child
+		border-bottom: 0

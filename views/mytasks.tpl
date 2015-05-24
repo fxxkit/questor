@@ -1,12 +1,16 @@
 <div class="cards-wrap">
-	<div class="card title">{{name}}'s task</div>
 	{{#each tasks}}
-	<li class="card" taskid={{ taskId }}>
-		<div class="task-title">{{ title }}</div>
-		<div class="task-id"></div>
-		<div class="task-type">{{ type }}</div>
-		<div class="task-lat">{{ lat }}</div>
-		<div class="task-lng">{{ lng }}</div>
+	<li class="card shadow" 
+		data-taskid={{ taskId }} 
+		data-lat={{ lat }}
+		data-lng={{ lng }}>
+
+		<h3 class="task-title">{{ title }}</h3>
+		<div class="task-tag">{{ type }}</div>
+		<div class="task-ribon horizontal"></div>
+		<div class="task-dist">500m</div>
+		<div class="task-date"></div>
+		<div class="task-npc"></div>
 	</li>
 	{{/each}}
 </div>

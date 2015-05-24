@@ -1,22 +1,78 @@
+@import compass/css3
+
 .card
 	width: 100% 
-	margin-bottom: 10px
 	list-style: none
+	margin-bottom: 10px
 	font-family: $common-font
 	display: block
 	padding: 11px 16px 11px 16px
 	background-color: #fff
+	position: relative
+	min-height: 100px
 
 	.task-title
 		font-size: $title-font-size
 
-	.task-type
-		background-color: #E74C3C
-		border-right: 2px solid #C0392B
-		border-bottom: 3px solid #C0392B
-		border-top-right-radius: 5px
-		border-bottom-right-radius: 5px
+	.task-tag
+		border-bottom-left-radius: 5px
 		box-sizing: border-box
 		display: inline-block
 		color: white
 		padding: 2px 5px
+		position: absolute
+		top: 0
+		right: 0
+
+	.task-ribon
+		position: absolute
+		top: 0
+		left: 0
+
+	.task-ribon.horizontal
+		width: 100%
+		height: 3px	
+
+	.task-ribon.vertical
+		width: 4px
+		height: 100%
+
+
+	&:nth-child(4n)
+		.task-ribon
+			background-color: #E74C3C
+		.task-tag
+			background-color: #E74C3C
+			border-right: 2px solid #C0392B
+			border-bottom: 3px solid #C0392B			
+	&:nth-child(4n+1)
+		.task-ribon
+			background-color: #2ECC71
+		.task-tag
+			background-color: #2ECC71
+			border-right: 2px solid #27AE60
+			border-bottom: 3px solid #27AE60			
+	&:nth-child(4n+2)
+		.task-ribon
+			background-color: #F1C40F
+		.task-tag
+			background-color: #F1C40F
+			border-right: 2px solid #F39C12
+			border-bottom: 3px solid #F39C12			
+	&:nth-child(4n+3)
+		.task-ribon
+			background-color: #3498DB
+		.task-tag
+			background-color: #3498DB
+			border-right: 2px solid #2980B9
+			border-bottom: 3px solid #2980B9			
+
+.card.edge2edge
+	margin-bottom: 0
+	border-bottom: 1px dashed #eee
+
+	&:last-child
+		border-bottom: 0
+
+.card.shadow
+	+box-shadow(#888 1px 1px 3px -1px)

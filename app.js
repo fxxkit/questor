@@ -3,7 +3,8 @@ var express = require('express'),
     exphbs = require('express-handlebars'),
     debug = require('debug')('handle'),
     mock_data = require('./mock_data/task-data'),
-    db = require('./datamodel/my-mongo');
+    db = require('./datamodel/my-mongo'),
+    pagesRouter = require('./routes/pages');
 
 var app = express();
 
@@ -21,54 +22,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', '.tpl');
 
-var selectPage = function (tab) {
-    return {
-        explore: tab === "explore",
-        mytasks: tab === "mytasks",
-        create:  tab === "create",
-        setting: tab === "setting"
-    }
-};
-
-// server route
-app.get('/', function (req, res, next) {
-    res.render('index', {
-        title: "Home",
-        page: selectPage('explore')
-    });
-});
-
-app.get('/mytasks', function (req, res) {
-    var myTasks = mock_data._mock_myTask.myTaskIdList.map(function(taskId, idx){
-        return mock_data._mock_allTasks[taskId]
-    });
-    debug(myTasks);
-    res.render('mytasks', {
-        tasks: myTasks,
-        name: req.query.name,
-        page: selectPage('mytasks')
-    });
-});
-
-app.get('/create', function (req, res) {
-    res.render('create', {
-        page: selectPage('create')
-    });
-});
-
-app.get('/setting', function (req, res) {
-    res.render('setting', {
-        page: selectPage('setting')
-    });
-});
-
 // start the server
 app.set('port', process.env.PORT || 3000);
 var server = app.listen(app.get('port'), function() {
   debug('Express server listening on port ' + server.address().port);
 });
 
-
+// router for pages
+app.use('/', pagesRouter);
 
 
 //REST API

@@ -1,4 +1,4 @@
-function MyMap(){
+function MyMap(mountPoint){
     'use strict';
     var oMap = this;
     // private property
@@ -13,8 +13,8 @@ function MyMap(){
             zoomControl: false,
             streetViewControl: false,
             mapTypeControl: false
-        }; 
-        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        };
+        map = new google.maps.Map(mountPoint, mapOptions);
 
         //Init user location
         _getUserLocation();

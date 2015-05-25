@@ -72,9 +72,6 @@ var server = app.listen(app.get('port'), function() {
 
 
 //REST API
-app.get('/api', function (req, res) {
-    res.send('Questor API is running');
-});
 
 /*
     @GET /api/tasks/<taskId>
@@ -83,8 +80,7 @@ app.get('/api/tasks/:_id([0-9]{1,8})', function (req, res) {
     debug('get task id:', taskId);
     var taskId = req.params._id;
 
-    var mock = req.query.mock;
-    if(mock){
+    if(req.query.mock){
         res.send(mock_data._mock_allTasks[taskId]);
     }
     else{
@@ -100,11 +96,19 @@ app.get('/api/tasks/:_id([0-9]{1,8})', function (req, res) {
 });
 
 /*
-    @POST /api/tasks
+    @POST /api/tasks (feed)
 */
 app.post('/api/tasks',function  (req,res) {
-    var testData = mock_data._mock_allTasks;
-    db.dataAccess.insertTasks(testData,function(err, data){
+    var taskData = null;
+
+    if(req.query.mock){
+        taskData = mock_data._mock_allTasks;        
+    }
+    else{
+        // Need To Add!
+    }
+
+    db.dataAccess.insertTasks(taskData,function(err, data){
         //console.log(data);
         res.send(data);
     });
@@ -122,15 +126,14 @@ app.get('/api/tasks/near', function (req, res){
     };
 
     debug(req.query);
-    var mock = req.query.mock;
-    if(mock){
+    if(req.query.mock){
         var resData = null;
         //The data in _mock_nearbyTask
-        resData =  mock_data._mock_nearbyTask.nearbyTaskIdList.map(function (taskId, idx) {
-           return mock_data._mock_allTasks[idx];
-        });    
+        //resData =  mock_data._mock_nearbyTask.nearbyTaskIdList.map(function (taskId, idx) {
+        //   return mock_data._mock_allTasks[idx];
+        //});    
         //All mock data
-        // resData = mock_data._mock_allTasks;
+        resData = mock_data._mock_allTasks;
 
         res.send(resData);   
     }

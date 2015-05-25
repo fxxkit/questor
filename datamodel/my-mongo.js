@@ -61,6 +61,7 @@ var dataAccess = {
                 var collection = db.collection(collectionName);
                 if(dbAction == EnumDbAction.FIND){
                     collection[dbAction](dbReq).toArray(function (err,result){
+                        db.close();
                         if(err){
                             debug("[DB Action Error!]");
                             debug(err);
@@ -71,11 +72,11 @@ var dataAccess = {
                             debug(result);
                             callback("",result);
                         }
-                        db.close();
                     });
                 }
                 else{
                     collection[dbAction](dbReq , function (err, result){
+                        db.close();
                         if(err){
                             debug("[DB Action Error!]");
                             debug(err);
@@ -86,7 +87,6 @@ var dataAccess = {
                             debug(result);
                             callback("",result);
                         }
-                        db.close();
                     });  
                 }
             }

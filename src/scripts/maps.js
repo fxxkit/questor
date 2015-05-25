@@ -68,7 +68,7 @@ function MyMap(mountPoint){
     
     oMap.fetchNearbyTasks = function (neLat, neLng, swLat, swLng) {
         var borderLatLng = _getBorderLatLng();
-        $.getJSON('/api/tasks/near', 
+        $.getJSON('/api/tasks/near?mock=true', 
             {nrthEstLat: borderLatLng.nrthEstLat,
             nrthEstLng: borderLatLng.nrthEstLng,
             sthWstLat: borderLatLng.sthWstLat ,

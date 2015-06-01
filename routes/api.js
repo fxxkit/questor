@@ -48,22 +48,32 @@ router.post('/tasks',function  (req,res) {
 });
 
 /*
+    @PUT /api/tasks (update)
+*/
+router.post('/tasks',function(req,res){
+
+});
+
+/*
     @GET /api/tasks/near?nrthEstLat=25.0562402&nrthEstLng=121.6241145&sthWstLat=25.0562402&sthWstLng=121.6241145
     [&mock=true]
 */
 router.get('/tasks/near', function (req, res){
     var borderData = {
-        nrthEstLat : req.query.nrthEstLat,
-        nrthEstLng : req.query.nrthEstLng,
-        sthWstLat : req.query.sthWstLat,
-        sthWstLng : req.query.sthWstLng
+        nrthEstLat : parseFloat(req.query.nrthEstLat),
+        nrthEstLng : parseFloat(req.query.nrthEstLng),
+        sthWstLat : parseFloat(req.query.sthWstLat),
+        sthWstLng : parseFloat(req.query.sthWstLng)
     };
 
     debug(req.query);
     if(req.query.mock){
         var resData = null; 
         //All mock data
-        resData = mock_data._mock_allTasks;
+        resData = mock_data._mock_allTasks.filter(function(obj){
+            return obj.lat >= borderData.sthWstLat && obj.lat <= borderData.nrthEstLat
+                && obj.lng >= borderData.sthWstLng && obj.lng <= borderData.nrthEstLng
+        });
 
         res.send(resData);   
     }

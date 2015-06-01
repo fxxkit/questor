@@ -31,6 +31,17 @@ var dataAccess = {
         });
     },
 
+    getMyTaskList: function(uid, callback){
+        req_uid = parseInt(uid);
+        var dbReq = {"owner_uid" : req_uid},
+            dbAction = EnumDbAction.FIND,
+            collectionName = "task";
+
+        this._doQuery(dbReq,dbAction,collectionName,function(err,result){
+            callback(err,result);
+        });    
+    },
+
     getNearByTasks: function(borderData,callback){
         //Force convert type
         borderData.nrthEstLat = parseFloat(borderData.nrthEstLat);
@@ -41,8 +52,8 @@ var dataAccess = {
         debug(" = getNearByTasks =");
         debug(borderData);
 
-        var dbReq = { "lat" : {$gte: borderData.sthWstLat, $lte:borderData.nrthEstLat}, 
-                      "lng" : {$gte: borderData.nrthEstLng , $lte: borderData.sthWstLng}},
+        var dbReq = { "lat" : {$gte: borderData.sthWstLat, $lte: borderData.nrthEstLat}, 
+                      "lng" : {$gte: borderData.sthWstLng, $lte: borderData.nrthEstLng }},
             dbAction = EnumDbAction.FIND,
             collectionName = "task";
 

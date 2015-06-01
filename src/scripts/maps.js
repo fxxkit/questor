@@ -66,7 +66,7 @@ function MyMap(mountPoint){
         map.setCenter(latlon);
     };
     
-    oMap.fetchNearbyTasks = function (neLat, neLng, swLat, swLng) {
+    oMap.fetchNearbyTasks = function () {
         var borderLatLng = _getBorderLatLng();
         $.getJSON('/api/tasks/near?mock=true', 
             {nrthEstLat: borderLatLng.nrthEstLat,
@@ -83,7 +83,9 @@ function MyMap(mountPoint){
     var _bindBoundsChangeEvent = function(){
         google.maps.event.addListener(map, 'bounds_changed', function() {
             console.log('==== BODER CHANGE ====');
-            _getBorderLatLng();        
+            // var borderLatLng = _getBorderLatLng();        
+            oMap.fetchNearbyTasks();
+
         });
     };
 
